@@ -127,7 +127,7 @@ def check_all_scrap(partitions):
 #get the top 3 sheet arrangements from the heap
 def print_scrap_mins(partitions, min_heap):
     smallest_indices = []
-    for i in range(3):
+    for i in range(50):
         smallest_value, smallest_index = heapq.heappop(min_heap)
         smallest_indices.append(smallest_index)
         result_text.insert(ctk.END, f"\nOption #{i+1}: \nTOTAL SCRAP: {smallest_value}\n")
