@@ -83,10 +83,9 @@ def allocate_orders(orders):
 
     # Create the order sheet with allocated columns
     design_sheet = [(order, columns_per_order[order]) for order in columns_per_order]
-    
+
     #count cards that were printed that exceeded the order quantity
     scrap_cards = sum(columns_per_order[order] * CARDS_PER_COLUMN * max_sheets_required - qty for order, qty in orders)
-
 
     return design_sheet, max_sheets_required, scrap_cards
 
@@ -110,9 +109,10 @@ def format_output(design_sheet, total_sheets, scrap):
     total_sheets = f"Total Sheets: {str(total_sheets)}"
     scrap = f"Scrap Cards: {str(scrap)}"
 
-    formatted = f"{design_sheet:<100}{total_sheets:<30} {scrap}\n"
+    formatted = f"{design_sheet:<100}{total_sheets:<30}{scrap}\n"
     return formatted
 
+#run all partitions through the scrap calculator and put them in a list
 def check_all_scrap(partitions):
     scrap_list = []
     for partition in partitions:
@@ -124,6 +124,7 @@ def check_all_scrap(partitions):
                 scrap_list.append(scrap_sum)
     return scrap_list
 
+#get the top 3 sheet arrangements from the heap
 def print_scrap_mins(partitions, min_heap):
     smallest_indices = []
     for i in range(3):
