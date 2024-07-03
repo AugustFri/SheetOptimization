@@ -124,6 +124,13 @@ def check_all_scrap(partitions):
                 scrap_list.append(scrap_sum)
     return scrap_list
 
+def total_scrap(partition):
+    scrap_sum = 0
+    for i, lst in enumerate(partition):
+        scrap = return_scrap(lst)
+        scrap_sum += scrap
+    return scrap_sum
+
 #get the top 3 sheet arrangements from the heap
 def print_scrap_mins(partitions, min_heap):
     smallest_indices = []
@@ -134,6 +141,70 @@ def print_scrap_mins(partitions, min_heap):
         for lst in partitions[smallest_index]:
             min_scrap_sheets, total_sheets, scrap = allocate_orders(lst)
             result_text.insert(ctk.END, format_output(min_scrap_sheets, total_sheets, scrap))
+
+def print_sorted_partitions(partitions):
+    count = 1
+    for partition in partitions:
+        scrap = total_scrap(partition)
+        total_cards = sum(num for _, num in tuples_list)
+        scrap_percent = round((scrap/total_cards)*100, 2)
+        if(scrap_percent < 15):
+            result_text.insert(ctk.END, f"\nOption #{count}: \nPercent Scrap: {round((scrap/total_cards)*100, 2)}%\nTOTAL SCRAP: {scrap}\n")
+            count += 1
+            for lst in partition:
+                min_scrap_sheets, total_sheets, scrap = allocate_orders(lst)
+                result_text.insert(ctk.END, format_output(min_scrap_sheets, total_sheets, scrap))
+
+
+
+
+def sort_partitions(partitions):
+    # Sort partitions by the number of lists in each partition
+    partitions.sort(key=len)
+
+    # Group partitions by their length
+    length_grouped_partitions = {}
+    for partition in partitions:
+        length = len(partition)
+        if length not in length_grouped_partitions:
+            length_grouped_partitions[length] = []
+        length_grouped_partitions[length].append(partition)
+
+    # Sort each group by scrap amount
+    sorted_partitions = []
+    for length in sorted(length_grouped_partitions.keys()):
+        partitions_with_same_length = length_grouped_partitions[length]
+        partitions_with_same_length.sort(key=lambda p: check_all_scrap([p])[0])
+        sorted_partitions.extend(partitions_with_same_length)
+
+    return sorted_partitions
+
+
+def get_lowest_scrap_partition(partitions):
+    # Sort partitions by the number of lists in each partition
+    partitions.sort(key=len)
+
+    # Group partitions by their length
+    length_grouped_partitions = {}
+    for partition in partitions:
+        length = len(partition)
+        if length not in length_grouped_partitions:
+            length_grouped_partitions[length] = []
+        length_grouped_partitions[length].append(partition)
+
+    # Select the partition with the lowest scrap for each length
+    lowest_scrap_partitions = []
+    for length, partitions_with_same_length in length_grouped_partitions.items():
+        lowest_scrap_partition = min(partitions_with_same_length, key=lambda p: check_all_scrap([p])[0])
+        lowest_scrap_partitions.append(lowest_scrap_partition)
+
+    return lowest_scrap_partitions
+
+
+def sort_partitions_by_length(partitions):
+    # Sort partitions by the number of lists in each partition
+    partitions.sort(key=len)
+    return partitions
 
 
     
@@ -184,13 +255,16 @@ def run_program():
         partitions = list(partitionn(tuples_list))
 
         #run every partition through allocate_orders and collect scrap amounts in correct indexes
-        scrap_list = check_all_scrap(partitions)
+        #scrap_list = check_all_scrap(partitions)
 
         #find and display info of first scrap min(which should be the one with the the fewest sheets also)
-        min_heap = [(value, index) for index, value in enumerate(scrap_list)]
-        heapq.heapify(min_heap)
+        #min_heap = [(value, index) for index, value in enumerate(scrap_list)]
 
-        print_scrap_mins(partitions, min_heap)
+        sorted_partitions = sort_partitions(partitions)
+        #sorted_partitions = get_lowest_scrap_partition(partitions)
+        #heapq.heapify(min_heap)
+
+        print_sorted_partitions(sorted_partitions)
         result_text.insert(ctk.END, "\nProgram finished.\n\n\n")
 
 def reset_program():
@@ -211,25 +285,27 @@ ctk.set_default_color_theme("dark-blue")  # Options: "blue" (default), "green", 
 root = ctk.CTk()
 root.title("Sheet Order Optimizer")
 
+button_font = ("Arial", 24, "bold")
+
 # Create input fields for string and integer
-ctk.CTkLabel(root, text="Order Name").grid(row=0, column=0, padx=10,pady=5, sticky="e")
+ctk.CTkLabel(root, text="Order Name", font = button_font).grid(row=0, column=0, padx=10,pady=5, sticky="e")
 string_entry = ctk.CTkEntry(root)
 string_entry.grid(row=0, column=1, padx= 10, pady=5, sticky="w")
 
-ctk.CTkLabel(root, text="Quantity").grid(row=1, column=0, padx = 10, pady=5, sticky="e")
+ctk.CTkLabel(root, text="Quantity", font = button_font).grid(row=1, column=0, padx = 10, pady=5, sticky="e")
 int_entry = ctk.CTkEntry(root)
 int_entry.grid(row=1, column=1, padx = 10, pady=5, sticky="w")
 
 # Button to add tuple to the list
-add_button = ctk.CTkButton(root, text="Add Order", command=add_tuple)
+add_button = ctk.CTkButton(root, text="Add Order", command=add_tuple, font = button_font)
 add_button.grid(row=2, column=0, columnspan=2, pady=10)
 
 # Button to run the program
-run_button = ctk.CTkButton(root, text="Run Program", command=run_program)
+run_button = ctk.CTkButton(root, text="Run Program", command=run_program, font = button_font)
 run_button.grid(row=3, column=0, columnspan=2, pady=10)
 
 # Button to reset the list
-add_button = ctk.CTkButton(root, text="RESET PROGRAM", command=reset_program)
+add_button = ctk.CTkButton(root, text="RESET PROGRAM", command=reset_program, font=button_font)
 add_button.grid(row=5, column=0, columnspan=2, pady=10)
 
 monospaced_font = ("Courier", 14)  # Change size as needed
