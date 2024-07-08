@@ -124,7 +124,17 @@ def check_all_scrap(partitions):
                 scrap_list.append(scrap_sum)
     return scrap_list
 
+    
 def total_scrap(partition):
+    """
+    Calculate the total scrap value for a given partition.
+
+    Parameters:
+    partition (list): A list of items representing the partition.
+
+    Returns:
+    int: The total scrap sum calculated for the partition.
+    """
     scrap_sum = 0
     for i, lst in enumerate(partition):
         scrap = return_scrap(lst)
@@ -154,8 +164,6 @@ def print_sorted_partitions(partitions):
             for lst in partition:
                 min_scrap_sheets, total_sheets, scrap = allocate_orders(lst)
                 result_text.insert(ctk.END, format_output(min_scrap_sheets, total_sheets, scrap))
-
-
 
 
 def sort_partitions(partitions):
