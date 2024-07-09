@@ -132,7 +132,6 @@ def check_all_scrap(partitions):
             if i == len(partition) - 1:
                 scrap_list.append(scrap_sum)
     return scrap_list
-
     
 def total_scrap(partition):
     """
@@ -174,7 +173,6 @@ def print_sorted_partitions(partitions):
                 min_scrap_sheets, total_sheets, scrap = allocate_orders(lst)
                 result_text.insert(ctk.END, format_output(min_scrap_sheets, total_sheets, scrap))
 
-
 def sort_partitions(partitions):
     # Sort partitions by the number of lists in each partition
     partitions.sort(key=len)
@@ -196,7 +194,6 @@ def sort_partitions(partitions):
 
     return sorted_partitions
 
-
 def get_lowest_scrap_partition(partitions):
     # Sort partitions by the number of lists in each partition
     partitions.sort(key=len)
@@ -216,7 +213,6 @@ def get_lowest_scrap_partition(partitions):
         lowest_scrap_partitions.append(lowest_scrap_partition)
 
     return lowest_scrap_partitions
-
 
 def sort_partitions_by_length(partitions):
     # Sort partitions by the number of lists in each partition
