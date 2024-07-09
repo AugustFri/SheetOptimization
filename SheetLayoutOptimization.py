@@ -105,6 +105,15 @@ def partitionn(collection):
         yield [[first]] + smaller
 
 def format_output(design_sheet, total_sheets, scrap):
+    """
+    Format the output string for the given design sheet, total sheets, and scrap cards.
+    Parameters:
+        design_sheet (str): The design sheet string.
+        total_sheets (int): The total number of sheets.
+        scrap (int): The number of scrap cards.
+    Returns:
+        str: The formatted output string.
+    """
     design_sheet = f"Design Sheet: {str(design_sheet)}"
     total_sheets = f"Total Sheets: {str(total_sheets)}"
     scrap = f"Scrap Cards: {str(scrap)}"
@@ -280,6 +289,7 @@ def reset_program():
     result_text.delete(1.0, ctk.END)
     result_text.insert(ctk.END, "\nAll orders cleared.\n\n\n")
 
+#not used
 def show_all_orders():
     result_text.insert(ctk.END, "All Orders:\n")
     for order in tuples_list:
