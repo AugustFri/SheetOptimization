@@ -119,6 +119,7 @@ def format_output(design_sheet, total_sheets, scrap):
     scrap = f"Scrap Cards: {str(scrap)}"
 
     formatted = f"{design_sheet:<100}{total_sheets:<30}{scrap}\n"
+    
     return formatted
 
 #run all partitions through the scrap calculator and put them in a list
