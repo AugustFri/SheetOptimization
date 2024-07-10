@@ -89,7 +89,6 @@ def allocate_orders(orders):
 
     return design_sheet, max_sheets_required, scrap_cards
 
-
 def partitionn(collection):
     COLUMNS_PER_SHEET = 10
     if len(collection) == 1:
