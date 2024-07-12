@@ -47,7 +47,13 @@ def return_scrap(orders):
     return scrap_cards
 
 def allocate_orders(orders):
-
+    """
+    Allocates orders to columns on a sheet layout.
+    Args:
+        orders (List[Tuple[Any, int]]): A list of tuples representing orders and their quantities.
+    Returns:
+        Tuple[List[Tuple[Any, int]], int, int]: A tuple containing the allocated order sheet, the maximum number of sheets required, and the number of scrap cards.
+    """
     # Constants
     CARDS_PER_COLUMN = 12
     COLUMNS_PER_SHEET = 10
@@ -116,7 +122,7 @@ def format_output(design_sheet, total_sheets, scrap):
     design_sheet = f"Design Sheet: {str(design_sheet)}"
     total_sheets = f"Total Sheets: {str(total_sheets)}"
     scrap = f"Scrap Cards: {str(scrap)}"
-
+    
     formatted = f"{design_sheet:<100}{total_sheets:<30}{scrap}\n"
     
     return formatted
