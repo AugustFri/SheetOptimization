@@ -287,6 +287,14 @@ def run_program():
         result_text.insert(ctk.END, "\nProgram finished.\n\n\n")
 
 def reset_program():
+    """
+    Resets the program by clearing the `tuples_list` and deleting the content of the `result_text` widget.
+    Inserts a message indicating that all orders have been cleared.
+    Parameters:
+        None
+    Returns:
+        None
+    """
     tuples_list.clear()
     result_text.delete(1.0, ctk.END)
     result_text.insert(ctk.END, "\nAll orders cleared.\n\n\n")
