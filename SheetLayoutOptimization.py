@@ -96,6 +96,18 @@ def allocate_orders(orders):
     return design_sheet, max_sheets_required, scrap_cards
 
 def partitionn(collection):
+    """
+    Generates all possible partitions of a collection into subsets of a maximum size.
+    Args:
+        collection (List[Any]): The collection to partition.
+    Yields:
+        List[List[Any]]: A list of subsets representing a partition of the collection.
+    Example:
+        >>> list(partitionn([1, 2, 3, 4]))
+        [[[1, 2, 3, 4]], [[1, 2], [3, 4]], [[1, 3], [2, 4]], [[1, 4], [2, 3]],
+        [[1], [2, 3, 4]], [[1, 2], [3], [4]], [[1, 3], [2], [4]], [[1, 4], [2], [3]],
+        [[1], [2, 3], [4]], [[1], [2, 4], [3]], [[1], [2], [3, 4]]]
+    """
     COLUMNS_PER_SHEET = 10
     if len(collection) == 1:
         yield [collection]
