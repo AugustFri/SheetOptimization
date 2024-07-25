@@ -49,7 +49,7 @@ def return_scrap(orders):
     
     #count cards that were printed that exceeded the order quantity
     scrap_cards = sum(columns_per_order[order] * CARDS_PER_COLUMN * max_sheets_required - qty for order, qty in orders)
-    
+
 
     return scrap_cards
 
