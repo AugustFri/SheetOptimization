@@ -5,7 +5,14 @@ import customtkinter as ctk
 
 
 def return_scrap(orders):
-
+    """
+    Calculates the number of scrap cards that were printed for a given set of orders.
+    Args:
+        orders (List[Tuple[Any, int]]): A list of tuples representing orders and their quantities.
+    Returns:
+        int: The total number of scrap cards that were printed.
+    Calculates the number of scrap cards that were printed for a given set of orders. The function takes in a list of tuples, where each tuple contains an order and its quantity. The function calculates the total quantity of all orders and then calculates the proportion of each order with respect to the total quantity. It then calculates the number of columns needed for each order based on the proportion. The function ensures that no more than the maximum number of columns are allocated to any order. Finally, it calculates the maximum number of sheets required to print all orders and counts the number of cards that were printed that exceeded the order quantity. The function returns the total number of scrap cards that were printed.
+    """
     # Constants
     CARDS_PER_COLUMN = 12
     COLUMNS_PER_SHEET = 10
