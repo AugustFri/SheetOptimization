@@ -148,6 +148,15 @@ def format_output(design_sheet, total_sheets, scrap):
 
 #run all partitions through the scrap calculator and put them in a list
 def check_all_scrap(partitions):
+    """
+    Calculate the total scrap value for each partition in the given list of partitions.
+
+    Parameters:
+        partitions (list): A list of partitions, where each partition is a list of lists.
+
+    Returns:
+        list: A list of scrap values, where each value corresponds to the total scrap value of a partition.
+    """
     scrap_list = []
     for partition in partitions:
         scrap_sum = 0
