@@ -185,6 +185,20 @@ def total_scrap(partition):
 
 #get the top 3 sheet arrangements from the heap
 def print_scrap_mins(partitions, min_heap):
+    """
+    Print the top 50 options with the lowest scrap amounts from the given heap of partitions.
+
+    Parameters:
+        partitions (list): A list of partitions, where each partition is a list of lists.
+        min_heap (heapq.heapq): A heap data structure containing the smallest scrap value and its index.
+
+    Returns:
+        None
+
+    This function iterates over the min_heap and retrieves the smallest scrap value and its index. It then appends the index to the smallest_indices list, and inserts the corresponding option number, total scrap value, and formatted output into the result_text widget. The function also calls the allocate_orders function for each list in the partition with the smallest index, and inserts the formatted output into the result_text widget.
+
+    Note: The result_text widget is assumed to be a tkinter Text widget.
+    """
     smallest_indices = []
     for i in range(50):
         smallest_value, smallest_index = heapq.heappop(min_heap)
