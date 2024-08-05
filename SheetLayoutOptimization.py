@@ -209,6 +209,15 @@ def print_scrap_mins(partitions, min_heap):
             result_text.insert(ctk.END, format_output(min_scrap_sheets, total_sheets, scrap))
 
 def print_sorted_partitions(partitions):
+    """
+    Prints the sorted partitions with their ranking, percent scrap, and total scrap.
+
+    Args:
+        partitions (list): A list of partitions, where each partition is a list of tuples representing the orders.
+
+    Returns:
+        None
+    """
     count = 1
     for partition in partitions:
         scrap = total_scrap(partition)
