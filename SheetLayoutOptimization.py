@@ -231,7 +231,15 @@ def print_sorted_partitions(partitions):
                 result_text.insert(ctk.END, format_output(min_scrap_sheets, total_sheets, scrap))
 
 def sort_partitions(partitions):
-    # Sort partitions by the number of lists in each partition
+    """
+    Sorts a list of partitions by the number of lists in each partition and then groups them by their length. 
+    The partitions are sorted by their scrap amount within each group. 
+
+    :param partitions: A list of partitions, where each partition is a list of lists.
+    :type partitions: list
+    :return: A sorted list of partitions.
+    :rtype: list
+    """
     partitions.sort(key=len)
 
     # Group partitions by their length
