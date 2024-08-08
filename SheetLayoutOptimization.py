@@ -260,6 +260,15 @@ def sort_partitions(partitions):
     return sorted_partitions
 
 def get_lowest_scrap_partition(partitions):
+    """
+    Given a list of partitions, this function sorts the partitions by the number of lists in each partition and groups them by their length.
+    It then selects the partition with the lowest scrap for each length and returns a list of these partitions.
+
+    :param partitions: A list of partitions, where each partition is a list of lists.
+    :type partitions: list
+    :return: A list of partitions with the lowest scrap for each length.
+    :rtype: list
+    """
     # Sort partitions by the number of lists in each partition
     partitions.sort(key=len)
 
