@@ -327,6 +327,19 @@ print_scrap_mins(partitions, min_heap)
 # All tkinter things for the window
 # Function to add tuple to the list
 def add_tuple():
+    """
+    Adds a tuple to the list of orders.
+
+    Retrieves the string and integer values from the input fields, checks if they are valid,
+    and appends the tuple to the list of orders. If the input is invalid, displays an error message.
+    If the number of orders exceeds 11, displays a warning message about the processing time.
+
+    Parameters:
+        None
+
+    Returns:
+        None
+    """
     string_value = string_entry.get()
     int_value = int_entry.get()
     if string_value and int_value.isdigit():
